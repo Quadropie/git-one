@@ -1,0 +1,190 @@
+#Guess the Number
+#Name: Jeffrey Rotenberry
+#Date: 08/24/2019
+
+
+#Guess computers number game
+def guess_myNumber():
+    #Number generator
+    import random
+    myNumber = random.randint(1,10)
+    #Attept generator
+    userList=[]#Users list of Guess
+    count = 1
+    print("You have 5 attempts to guess my number.\n")
+    while True:
+        #Users number input for guess
+        #Loop to get a valid entry
+        try:
+            guess = int(input("Guess a number between 1 and 10:\t"))
+            print()
+            while (guess < 1) or (guess > 10):
+                print("Invalid Entry: Please only enter in a number between 1 and 10.")
+                print()
+                guess = int(input("Guess a number between 1 and 10:\t"))
+                print()
+        except:
+            print()
+            print("Invalid Entry: Numbers Only.")
+            print()
+            continue
+        userList.append(guess)#Adds to list
+
+        if count < 5: #Checks to see how many attemps have been used
+            #Answers for guess
+            if (guess< myNumber) : #Number to low
+                print("Too low")
+                print()
+                count= count+1 #Attempt tracker
+            elif (guess > myNumber) : #Number to high
+                print("Too high")
+                print()
+                count =count+1 #Attempt trackek
+            elif (guess == myNumber): #Correct answer
+                print("You guessed it! You got it in ",count," attempts.")
+                print()
+                print("You picked the fallowing:",userList)
+                print()
+                break
+        else:
+            print("Game Over")
+            print()
+            break
+    play_again1()
+
+#Computer guessing game
+def guess_yourNumber():
+    while True:
+        #Users number input for guess
+        #Loop to get a valid entry
+        try:
+            number = int(input("Enter in a number between 1 and 10:\t"))
+            print()
+            while (number < 1) or (number > 10):
+                print("Invalid Entry: Please only enter in a number between 1 and 10.")
+                print()
+                number = int(input("Enter in a number between 1 and 10:\t"))
+                print()
+        except:
+            print()
+            print("Invalid Entry: Numbers Only.")
+            print()
+            continue
+        break
+    computer_guess(number)
+
+def computer_guess(number):
+    count = 1#Attempt generator
+    computerList=[]#Computers list of guesses
+    while True:
+        if count < 10:#Checks the attemps used
+        #Number generator
+            import random
+            c_guess = random.randint(1,10)
+            computerList.append(c_guess)
+            if (number < c_guess): #Number to low
+                print("The computer guessed ",c_guess," which was too high.")
+                print()
+                count= count+1 #Count tracker
+                continue
+            elif (number > c_guess): #Number to high
+                print("The computer guessed ",c_guess," which was too low.")
+                print()
+                count =count+1 #Count tracker
+                continue
+            elif (number == c_guess): #Correct answer
+                print("The Computer guessed it! It took ",count," attemps.")
+                print()
+                print("The computer guessed the following numbers:",computerList)
+                print()
+                break
+        else:
+            print("The Computer could not guess your number in 10 attemps.\n")
+            break
+    play_again2()
+
+#Try again for guessing game
+def play_again1():
+    choice = input("Would you like to play again?(y/n):\t")
+    print()
+    #Loop to get a valid choice of Y or N
+    while choice.lower()!= "y" and choice.lower() != "n":
+        print("Please Enter Y or N.")
+        print()
+        choice = input("Would you like to play again?(y/n):\t")
+        print()
+    if choice.lower() == "y":
+        guess_myNumber()
+    else:
+        print()
+
+#Try again for computer guessing game
+def play_again2():
+    choice = input("Would you like to play again?(y/n):\t")
+    print()
+    #Loop to get a valid choice of Y or N
+    while choice.lower()!= "y" and choice.lower() != "n":
+        print("Please Enter Y or N.")
+        print()
+        choice = input("Would you like to play again?(y/n):\t")
+        print()
+    if choice.lower() == "y":
+        guess_yourNumber()
+    else:
+        print()
+
+
+#Main Menuit
+def main():
+    title_bar()#Recalls title bar function
+    print("Main Menu")
+    print()
+    main_menu()#Recalls menu function
+    #Choosing an option
+    while True:
+        try:
+            option = int(input("Enter a menu option (4 to recall menu):\t"))
+            print()
+        #Making sure entry is valid
+            while option < 1 or option > 4:
+                print("Invalid Entry: Please enter in the number of the menu choice that you would like.")
+                print()
+                option = int(input("Enter a menu option (4 to recall menu):\t"))
+                print()
+        except:
+            print()
+            print("Invalid Entry: Choice most be a number 1-4.")
+            print()
+            continue
+        #Option travel locations
+        if option == 1:
+            guess_myNumber()
+        if option == 2:
+            guess_yourNumber()
+        if option == 4:
+            main_menu()
+        if option == 3:
+            break
+
+    #Sign out message
+    print("Thank you for playing the guess the number game! Good Bye!")
+
+
+#Title message
+def title_bar():
+    print()
+    print("\t-----------------------------------------------------------------")
+    print("\t|\t\tWelcome to Guess the number Game!\t\t|")
+    print("\t-----------------------------------------------------------------")
+    print()
+
+#Main menu display
+def main_menu():
+        print("1. You guess the number.")
+        print("2. You enter in a number and see if the computer can guess it.")
+        print("3. Exit")
+        print()
+
+#The following code checks whether the current module is the main module
+if __name__ == "__main__":
+    main();
